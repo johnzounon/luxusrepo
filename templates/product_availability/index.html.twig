@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProductAvailability index{% endblock %}
+
+{% block body %}
+    <h1>ProductAvailability index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title_fr</th>
+                <th>Title_de</th>
+                <th>Title_it</th>
+                <th>Is_available</th>
+                <th>Created_at</th>
+                <th>Updated_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product_availability in product_availabilities %}
+            <tr>
+                <td>{{ product_availability.id }}</td>
+                <td>{{ product_availability.titleFr }}</td>
+                <td>{{ product_availability.titleDe }}</td>
+                <td>{{ product_availability.titleIt }}</td>
+                <td>{{ product_availability.isAvailable ? 'Yes' : 'No' }}</td>
+                <td>{{ product_availability.createdAt ? product_availability.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ product_availability.updatedAt ? product_availability.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_product_availability_show', {'id': product_availability.id}) }}">show</a>
+                    <a href="{{ path('app_product_availability_edit', {'id': product_availability.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_product_availability_new') }}">Create new</a>
+{% endblock %}

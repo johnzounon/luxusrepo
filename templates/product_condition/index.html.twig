@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProductCondition index{% endblock %}
+
+{% block body %}
+    <h1>ProductCondition index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title_fr</th>
+                <th>Title_de</th>
+                <th>Title_it</th>
+                <th>Created_at</th>
+                <th>Updated_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product_condition in product_conditions %}
+            <tr>
+                <td>{{ product_condition.id }}</td>
+                <td>{{ product_condition.titleFr }}</td>
+                <td>{{ product_condition.titleDe }}</td>
+                <td>{{ product_condition.titleIt }}</td>
+                <td>{{ product_condition.createdAt ? product_condition.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ product_condition.updatedAt ? product_condition.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_product_condition_show', {'id': product_condition.id}) }}">show</a>
+                    <a href="{{ path('app_product_condition_edit', {'id': product_condition.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_product_condition_new') }}">Create new</a>
+{% endblock %}

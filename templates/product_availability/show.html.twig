@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProductAvailability{% endblock %}
+
+{% block body %}
+    <h1>ProductAvailability</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ product_availability.id }}</td>
+            </tr>
+            <tr>
+                <th>Title_fr</th>
+                <td>{{ product_availability.titleFr }}</td>
+            </tr>
+            <tr>
+                <th>Title_de</th>
+                <td>{{ product_availability.titleDe }}</td>
+            </tr>
+            <tr>
+                <th>Title_it</th>
+                <td>{{ product_availability.titleIt }}</td>
+            </tr>
+            <tr>
+                <th>Is_available</th>
+                <td>{{ product_availability.isAvailable ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ product_availability.createdAt ? product_availability.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ product_availability.updatedAt ? product_availability.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_product_availability_index') }}">back to list</a>
+
+    <a href="{{ path('app_product_availability_edit', {'id': product_availability.id}) }}">edit</a>
+
+    {{ include('product_availability/_delete_form.html.twig') }}
+{% endblock %}

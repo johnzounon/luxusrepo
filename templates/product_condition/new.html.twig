@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ProductCondition{% endblock %}
+
+{% block body %}
+    <h1>Create new ProductCondition</h1>
+
+    {{ include('product_condition/_form.html.twig') }}
+
+    <a href="{{ path('app_product_condition_index') }}">back to list</a>
+{% endblock %}

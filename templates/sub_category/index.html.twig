@@ -1,0 +1,123 @@
+{% extends 'base/auth_base.html.twig' %}
+
+{% block title %}Toutes les Sous-Catégories - Administration du site{% endblock %}
+
+{% block body %}
+
+<section class="profile__area pt-120 pb-120" style="background-image: linear-gradient(#e0c184,#000000);">
+    <div class="container">
+
+        <section class="breadcrumb__area breadcrumb__style-2 include-bg pt-50 pb-20 text-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="breadcrumb__content p-relative z-index-1">
+                        <div class="breadcrumb__list has-icon">
+                            <span class="breadcrumb-icon">
+                                <i class="fa fa-dashboard"></i>
+                            </span>
+                            <span><a href="{{path('app_custom_index')}}">Tableau de bord</a></span>
+                            <span><a href="{{path('app_admin_website')}}">Administration du site</a></span>
+                            <span>Sous-Catégories</span>
+                            <span>Liste</span>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="profile__inner p-relative">
+            <div class="profile__shape">
+                <img class="profile__shape-1" src="/assets/img/login/laptop.png" alt="" >
+                <img class="profile__shape-2" src="/assets/img/login/man.png" alt="" >
+                <img class="profile__shape-3" src="/assets/img/login/shape-1.png" alt="" >
+                <img class="profile__shape-4" src="/assets/img/login/shape-2.png" alt="" >
+                <img class="profile__shape-5" src="/assets/img/login/shape-3.png" alt="" >
+                <img class="profile__shape-6" src="/assets/img/login/shape-4.png" alt="" >
+            </div>
+            <div class="row">
+                <div class="col-xxl-12 col-lg-12">
+                    <div class="profile__tab-content">
+                    <div class="tab-content" id="profile-tabContent">
+                        <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <div class="profile__main">
+                                <div class="profile__main-info">
+                                    <div class="row gx-3">
+                                        {% for message in app.flashes('success') %}
+
+                                            <div class="alert alert-dismissible alert-success">
+
+                                                {{ message }}
+
+                                            </div>
+                                            
+                                        {% endfor %}
+                                        <table class="table table-bordered table-striped mt-2">
+                                            <thead>
+                                                <tr>
+                                                    <td colspan="9">
+                                                        <a class="tp-logout-btn" href="{{ path('app_sub_category_new') }}">Créer une sous-catégorie</a>
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Catégorie Mère</th>
+                                                    <th>Titre</th>
+                                                    <th>Description</th>
+                                                    <th>Création le</th>
+                                                    <th>Rang <span title="Disposition ascendante des sous-catégories"><i class="fa fa-question-circle"></i></span></th>
+                                                    <th>publier</th>
+                                                    <th colspan="3">Actions</th>
+                                                </tr>
+                                                {% for sub_category_key, sub_category in sub_categories %}
+                                                <tr>
+                                                    <td>{{ sub_category_key + 1 }}</td>
+                                                    <td>{{ sub_category.category.titleFr}}</td>
+                                                    <td>{{ sub_category.titleFr|striptags|length > 20 ? sub_category.titleFr|striptags|slice(0, 20) ~ '...' : sub_category.titleFr|striptags }}</td>
+                                                    <td>{{ sub_category.descriptionFr|striptags|length > 60 ? sub_category.descriptionFr|striptags|slice(0, 60) ~ '...' : sub_category.descriptionFr|striptags}}</td>
+                                                    <td>{{ sub_category.createdAt ? sub_category.createdAt|date('d/m/Y H:i:s') : '' }}</td>
+                                                    <td>{{ sub_category.ranking|number_format(0, '.', ' ') }}</td>
+                                                    <td>
+                                                    {% if sub_category.isVisible == true %}
+                                                        <span class="text-success">Oui</span>
+                                                    {% else %}
+                                                        <span class="text-danger">Non</span>
+                                                    {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <a class="tp-logout-btn" href="{{ path('app_sub_category_show', {'id': sub_category.id}) }}"><i class="fa fa-eye"></i></a>
+                                                    </td>
+                                                    <td>
+                                                        <a class="tp-logout-btn" href="{{ path('app_sub_category_edit', {'id': sub_category.id}) }}"><i class="fa fa-edit text-primary"></i></a>
+                                                    </td>
+                                                    <td>
+                                                        <form method="post" action="{{ path('app_sub_category_delete', {'id': sub_category.id}) }}" onsubmit="return confirm('La suppression est irréversible !');">
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sub_category.id) }}">
+                                                            <button type="submit" class="tp-logout-btn"><i class="fa fa-trash text-danger"></i></button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                {% else %}
+                                                <tr>
+                                                    <td colspan="10">Données non disponibles</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,76 @@
+{{ form_start(form) }}
+   
+    <div class="profile__input-box">
+        <div class="profile__input">
+        {{ form_row(form.category) }}
+        </div>
+    </div>
+    
+    <div class="tp-login-input-box">
+        <div class="tp-login-input">
+        {{ form_row(form.title_fr) }}
+        </div>
+        <div class="tp-login-input-title">
+        <label for="name">Titre de la sous-catégorie (fr)</label>
+        </div>
+    </div>
+    <div class="tp-login-input-box">
+        <div class="tp-login-input">
+        {{ form_row(form.title_de) }}
+        </div>
+        <div class="tp-login-input-title">
+        <label for="name">Titre de la sous-catégorie (de)</label>
+        </div>
+    </div>
+    <div class="tp-login-input-box">
+        <div class="tp-login-input">
+        {{ form_row(form.title_it) }}
+        </div>
+        <div class="tp-login-input-title">
+        <label for="name">Titre de la sous-catégorie (it)</label>
+        </div>
+    </div>
+    <div class="tp-login-input-box">
+        <div class="tp-login-input">
+        {{ form_row(form.description_fr) }}
+        </div>
+        <div class="tp-login-input-title">
+        <label for="name">Description de la sous-catégorie (fr)</label>
+        </div>
+    </div>
+    <div class="tp-login-input-box">
+        <div class="tp-login-input">
+        {{ form_row(form.description_de) }}
+        </div>
+        <div class="tp-login-input-title">
+        <label for="name">Description de la sous-catégorie (de)</label>
+        </div>
+    </div>
+    <div class="tp-login-input-box">
+        <div class="tp-login-input">
+        {{ form_row(form.description_it) }}
+        </div>
+        <div class="tp-login-input-title">
+        <label for="name">Description de la sous-catégorie (it)</label>
+        </div>
+    </div>
+    <div class="tp-login-input-box">
+        <div class="tp-login-input">
+        {{ form_row(form.ranking) }}
+        </div>
+        <div class="tp-login-input-title">
+        <label for="name"><span title="Disposition ascendante des catégories"><i class="fa fa-question-circle"></i></span> Classement de la sous-catégorie</label>
+        </div>
+    </div>
+    <div class="tp-login-input-box">
+        <div class="tp-login-input">
+        {{ form_row(form.is_visible) }}
+        </div>
+        <div class="tp-login-input-title">
+        <label for="name">Visibilité de la sous-catégorie</label>
+        </div>
+    </div>
+    <div class="tp-login-bottom">
+        <button type="submit" class="tp-login-btn w-100">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+{{ form_end(form) }}

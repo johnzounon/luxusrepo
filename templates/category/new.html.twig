@@ -1,0 +1,72 @@
+{% extends 'base/auth_base.html.twig' %}
+
+{% block title %}Nouvelle Catégorie - Administration du site{% endblock %}
+
+{% block body %}
+
+<section class="profile__area pb-120" style="background-image: linear-gradient(#e0c184,#000000);">
+    <div class="container">
+
+        <section class="breadcrumb__area breadcrumb__style-2 include-bg pt-50 pb-20 text-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="breadcrumb__content p-relative z-index-1">
+                        <div class="breadcrumb__list has-icon">
+                            <span class="breadcrumb-icon">
+                                <i class="fa fa-dashboard"></i>
+                            </span>
+                            <span><a href="{{path('app_custom_index')}}">Tableau de bord</a></span>
+                            <span><a href="{{path('app_admin_website')}}">Administration du site</a></span>
+                            <span>Catégories</span>
+                            <span>Ajout</span>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tp-login-area pb-140 p-relative z-index-1 fix">
+            <div class="tp-login-shape">
+                <img class="tp-login-shape-1" src="/assets/img/login/login-shape-1.png" alt="">
+                <img class="tp-login-shape-2" src="/assets/img/login/login-shape-2.png" alt="">
+                <img class="tp-login-shape-3" src="/assets/img/login/login-shape-3.png" alt="">
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-8 col-lg-10">
+                        <div class="tp-login-wrapper">
+                        <div class="tp-login-option">
+
+                            {{ form_errors(form) }}
+
+                            {% for message in app.flashes('success') %}
+
+                                <div class="alert alert-dismissible alert-success">
+
+                                    {{ message }}
+
+                                </div>
+                                
+                            {% endfor %}
+                            <a class="tp-logout-btn" href="{{ path('app_category_index') }}"><i class="fa fa-arrow-left"></i> Retour à la liste</a>
+
+                            <div class="tp-login-mail text-center mb-40 mt-2">
+                                <p>Créer une nouvelle catégorie</p>
+                            </div>
+                            <div class="tp-login-input-wrapper">
+                                {{ include('category/_form.html.twig') }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        
+    
+    </div>
+</section>
+{% endblock %}

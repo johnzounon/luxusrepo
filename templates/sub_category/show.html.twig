@@ -1,0 +1,150 @@
+{% extends 'base/auth_base.html.twig' %}
+
+{% block title %}Détails de la sous-catégorie {{sub_category.titleFr}} - Administration du site{% endblock %}
+
+{% block body %}
+
+<section class="profile__area pt-120 pb-120" style="background-image: linear-gradient(#e0c184,#000000);">
+    
+    <div class="container">
+
+        <section class="breadcrumb__area breadcrumb__style-2 include-bg pt-50 pb-20 text-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="breadcrumb__content p-relative z-index-1">
+                        <div class="breadcrumb__list has-icon">
+                            <span class="breadcrumb-icon">
+                                <i class="fa fa-dashboard"></i>
+                            </span>
+                            <span><a href="{{path('app_custom_index')}}">Tableau de bord</a></span>
+                            <span><a href="{{path('app_admin_website')}}">Administration du site</a></span>
+                            <span>Sous-Catégories</span>
+                            <span>Détails</span>
+                            <span>{{sub_category.titleFr}}</span>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="profile__inner p-relative">
+            <div class="profile__shape">
+                <img class="profile__shape-1" src="/assets/img/login/laptop.png" alt="" >
+                <img class="profile__shape-2" src="/assets/img/login/man.png" alt="" >
+                <img class="profile__shape-3" src="/assets/img/login/shape-1.png" alt="" >
+                <img class="profile__shape-4" src="/assets/img/login/shape-2.png" alt="" >
+                <img class="profile__shape-5" src="/assets/img/login/shape-3.png" alt="" >
+                <img class="profile__shape-6" src="/assets/img/login/shape-4.png" alt="" >
+            </div>
+            <div class="row">
+                <div class="col-xxl-12 col-lg-12">
+                    <div class="profile__tab-content">
+                    <div class="tab-content" id="profile-tabContent">
+                        <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <div class="profile__main">
+                                <div class="profile__main-info">
+                                    <div class="row gx-3">
+                                        <table class="table table-bordered table-striped table-responsive mt-2">
+                                            <thead>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <a class="tp-logout-btn" href="{{ path('app_sub_category_index') }}"> <i class="fa fa-arrow-left"></i> Retour à la liste</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ path('app_sub_category_edit', {'id': sub_category.id}) }}" class="tp-logout-btn"><i class="fa fa-edit text-primary"></i></a>
+                                                    </td>
+                                                    <td>
+                                                        <form method="post" action="{{ path('app_sub_category_delete', {'id': sub_category.id}) }}" onsubmit="return confirm('La suppression est irréversible !');">
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sub_category.id) }}">
+                                                            <button type="submit" class="tp-logout-btn"><i class="fa fa-trash text-danger"></i></button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Traduction</th>
+                                                    <th>Version (FR)</th>
+                                                    <th>Version (DE)</th>
+                                                    <th>Version (IT)</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Catégorie mère</td>
+                                                    <td>{{ sub_category.category.titleFr|striptags|length > 20 ? sub_category.category.titleFr|striptags|slice(0, 20) ~ '...' : sub_category.category.titleFr|striptags }}</td>
+                                                    <td>{{ sub_category.category.titleDe|striptags|length > 20 ? sub_category.category.titleDe|striptags|slice(0, 20) ~ '...' : sub_category.category.titleDe|striptags }}</td>
+                                                    <td>{{ sub_category.category.titleIt|striptags|length > 20 ? sub_category.category.titleIt|striptags|slice(0, 20) ~ '...' : sub_category.category.titleIt|striptags }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Titre</td>
+                                                    <td>{{ sub_category.titleFr|striptags|length > 20 ? sub_category.titleFr|striptags|slice(0, 20) ~ '...' : sub_category.titleFr|striptags }}</td>
+                                                    <td>{{ sub_category.titleDe|striptags|length > 20 ? sub_category.titleDe|striptags|slice(0, 20) ~ '...' : sub_category.titleDe|striptags }}</td>
+                                                    <td>{{ sub_category.titleIt|striptags|length > 20 ? sub_category.titleIt|striptags|slice(0, 20) ~ '...' : sub_category.titleIt|striptags }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Description</td>
+                                                    <td>{{ sub_category.descriptionFr|striptags|length > 60 ? sub_category.descriptionFr|striptags|slice(0, 60) ~ '...' : sub_category.descriptionFr|striptags}}</td>
+                                                    <td>{{ sub_category.descriptionDe|striptags|length > 60 ? sub_category.descriptionDe|striptags|slice(0, 60) ~ '...' : sub_category.descriptionDe|striptags}}</td>
+                                                    <td>{{ sub_category.descriptionIt|striptags|length > 60 ? sub_category.descriptionIt|striptags|slice(0, 60) ~ '...' : sub_category.descriptionIt|striptags}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Création le</td>
+                                                    <td colspan="3">{{ sub_category.createdAt ? sub_category.createdAt|date('d/m/Y H:i:s') : '' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dernière modification le</td>
+                                                    <td colspan="3">{{ sub_category.updatedAt ? sub_category.updatedAt|date('d/m/Y H:i:s') : '' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Rang <span title="Disposition ascendante des sous-catégories"><i class="fa fa-question-circle"></i></span></td>
+                                                    <td colspan="3">{{ sub_category.ranking|number_format(0, '.', ' ') }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Publié</td>
+                                                    <td colspan="3">
+                                                        {% if sub_category.isVisible == true %}
+                                                        <span class="text-success">Oui</span>
+                                                        {% else %}
+                                                            <span class="text-danger">Non</span>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Créateur du contenu</td>
+                                                    <td colspan="3">
+                                                        {% if app.user.email == sub_category.user.email %}
+                                                            <span>Vous</span> (<a class="text-primary" href="mailto:{{sub_category.user.email}}">{{sub_category.user.email}}</a>)
+                                                        {% else %}
+                                                            <a class="text-primary" href="mailto:{{sub_category.user.email}}">{{sub_category.user.email}}</a>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dernier administrateur</td>
+                                                    <td colspan="3">
+                                                        {% if app.user.email == sub_category.user.email %}
+                                                            <span>Vous</span> (<a class="text-primary" href="mailto:{{sub_category.user.email}}">{{sub_category.user.email}}</a>)
+                                                        {% else %}
+                                                            <a class="text-primary" href="mailto:{{sub_category.user.email}}">{{sub_category.user.email}}</a>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
